@@ -45,12 +45,14 @@ const Login = () => {
             />
           </div>
           <div>
+            <Link href="/dashboard">
             <button
               type="submit"
               className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-200"
             >
               Login
             </button>
+            </Link>
           </div>
           <div className="text-center text-sm text-gray-400">
             <a href="#" className="font-medium text-blue-500 hover:text-blue-600">Forgot your password?</a>
