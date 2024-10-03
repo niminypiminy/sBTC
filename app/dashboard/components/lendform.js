@@ -9,49 +9,55 @@ const LendForm = () => {
 
   const handleLendSubmit = (e) => {
     e.preventDefault();
-    console.log({ lendAmount, interestRate, lendDuration });
-    // Handle lend form submission logic here
+    // Convert months to an integer or handle as necessary
+    const durationInMonths = parseInt(lendDuration, 10);
+    console.log({ 
+      lendAmount, 
+      interestRate, 
+      lendDuration: durationInMonths 
+    });
+    // Add logic here to handle the form submission, e.g., API call
   };
 
   return (
-    <form onSubmit={handleLendSubmit} className="text-white space-y-4">
-      <div>
-        <label htmlFor="lendAmount">Amount to Lend</label>
+    <form onSubmit={handleLendSubmit} className="text-white bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
+      <div className="flex flex-col">
+        <label htmlFor="lendAmount" className="mb-2 font-medium">Amount to Lend</label>
         <input 
           id="lendAmount" 
           type="number"
           value={lendAmount} 
           onChange={(e) => setLendAmount(e.target.value)} 
-          className="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white"
-          placeholder="BTC"
+          className="mt-1 p-2 w-full rounded-md bg-gray-700 border border-gray-600 text-white"
+          placeholder="Enter amount in BTC"
           step="0.00000001"
         />
       </div>
-      <div>
-        <label htmlFor="lendInterestRate">Interest Rate (%)</label>
+      <div className="flex flex-col">
+        <label htmlFor="lendInterestRate" className="mb-2 font-medium">Minimum Interest Rate (%)</label>
         <input 
           id="lendInterestRate" 
           type="number" 
           value={interestRate} 
           onChange={(e) => setInterestRate(e.target.value)} 
-          className="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white"
+          className="mt-1 p-2 w-full rounded-md bg-gray-700 border border-gray-600 text-white"
           placeholder="e.g., 4"
         />
       </div>
-      <div>
-        <label htmlFor="lendDuration">Lending Duration (days)</label>
+      <div className="flex flex-col">
+        <label htmlFor="lendDuration" className="mb-2 font-medium">Lending Duration (months)</label>
         <input 
           id="lendDuration" 
           type="number" 
           value={lendDuration} 
           onChange={(e) => setLendDuration(e.target.value)} 
-          className="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white"
-          placeholder="e.g., 60"
+          className="mt-1 p-2 w-full rounded-md bg-gray-700 border border-gray-600 text-white"
+          placeholder="e.g., 3"
         />
       </div>
       <button 
         type="submit" 
-        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+        className="mt-4 w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
       >
         Submit Lend Offer
       </button>
