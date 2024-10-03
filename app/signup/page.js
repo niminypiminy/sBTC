@@ -1,46 +1,46 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Signup = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="w-full max-w-md p-8 space-y-6 border rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold text-center">Sign up</h1>
-        <form>
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                required
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder="Enter your password"
-              />
-            </div>
+    <div className="flex items-center justify-center min-h-screen bg-white relative">
+
+      <div className="w-full max-w-md p-8 space-y-8 bg-black shadow-lg rounded-xl z-10">
+        <h1 className="text-3xl font-bold text-center text-white">Sign up</h1>
+        <form className="space-y-6">
+          <div>
+            <label htmlFor="email" className="sr-only">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              className="w-full pl-4 pr-4 py-2 border-b-2 border-blue-300 bg-blue-900 text-blue-900 focus:outline-none focus:border-blue-500 transition-colors"
+              placeholder="Email"
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="sr-only">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              className="w-full pl-4 pr-4 py-2 border-b-2 border-blue-300 bg-blue-900 text-black focus:outline-none focus:border-blue-500 transition-colors"
+              placeholder="Password"
+            />
           </div>
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-700 text-white mt-6 font-bold py-2 rounded-md"
+              className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-200"
             >
-              Sign Up
+              Sign up
             </button>
+          </div>
+          <div className="text-center text-sm text-gray-400">
+            Already have an account? 
+            <Link href="/login" className="font-medium text-blue-500 px-4 hover:text-blue-600">Login</Link>
           </div>
         </form>
       </div>
