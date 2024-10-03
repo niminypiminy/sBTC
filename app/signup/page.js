@@ -15,7 +15,7 @@ const Signup = () => {
               id="email"
               name="email"
               required
-              className="w-full pl-4 pr-4 py-2 border-b-2 border-blue-300 bg-blue-900 text-blue-900 focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full pl-4 pr-4 py-2 border-b-2 border-blue-300 bg-blue-100 text-black focus:outline-none focus:border-blue-500 transition-colors"
               placeholder="Email"
             />
           </div>
@@ -26,7 +26,7 @@ const Signup = () => {
               id="password"
               name="password"
               required
-              className="w-full pl-4 pr-4 py-2 border-b-2 border-blue-300 bg-blue-900 text-black focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full pl-4 pr-4 py-2 border-b-2 border-blue-300 bg-blue-100 text-black focus:outline-none focus:border-blue-500 transition-colors"
               placeholder="Password"
             />
           </div>

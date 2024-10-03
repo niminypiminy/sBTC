@@ -14,7 +14,7 @@ const HeroSection = () => {
             Empower Your <span className="text-blue-300">Assets</span>: Borrow and Lend with Confidence.
           </h1>
           <p className="text-lg md:text-xl text-gray-300 text-center px-16 mb-10 mt-6">
-          Borrow fiat using Bitcoin as collateral, or lend confidently, knowing your investment is protected by trustless smart contracts.          </p>
+          Unlock borrowing and lending with Bitcoin collateral, safeguarded by trustless smart contracts for your peace of mind.          </p>
           <div className="flex justify-center">
             <a 
               href="/download" 
