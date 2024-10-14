@@ -12,17 +12,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black shadow-md fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold text-white">Kredia</Link>
+        <Link href="/" className="text-xl font-bold">Purr<span className="bg-lime-100 text-lime-900 py-1 px-2 rounded inline-block">lend</span></Link>
 
         {/* Navigation Links (hidden on mobile) */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/login" className="bg-blue-900 hover:bg-blue-950 text-white hover:text-white transition duration-300 py-2 px-4 rounded-full border border-blue-300">
+          <Link href="/login" className="bg-lime-900 text-white hover:bg-lime-100 hover:text-lime-900 transition duration-300 py-2 px-4 rounded-full">
             Login
           </Link>
-          <Link href="/signup" className="text-blue-700 hover:bg-blue-800 hover:text-white transition duration-300 py-2 px-4 rounded-full border border-blue-700">
+          <Link href="/signup" className="bg-lime-100 text-lime-900 hover:bg-lime-900 hover:text-lime-100 transition duration-300 py-2 px-4 rounded-full border border-darkgreen">
             Sign Up
           </Link>
         </div>
@@ -31,11 +31,11 @@ const Navbar = () => {
         <div className="md:hidden">
           <button 
             onClick={toggleMenu} 
-            className="p-2 rounded-md hover:bg-blue-300 transition-colors duration-300 focus:outline-none"
+            className="p-2 rounded-md hover:bg-lightgreen transition-colors duration-300 focus:outline-none"
           >
             {isOpen ? 
-              <FaTimes className="text-gray-300 h-5 w-5" /> : 
-              <FaBars className="text-gray-300 h-5 w-5" />
+              <FaTimes className="text-darkgreen h-5 w-5" /> : 
+              <FaBars className="text-darkgreen h-5 w-5" />
             }
           </button>
         </div>
@@ -43,10 +43,10 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-900 shadow-lg">
+        <div className="md:hidden bg-white shadow-lg">
           <div className="py-2 space-y-1">
-            <Link href="/login" onClick={toggleMenu} className="block px-4 py-2 text-sm text-gray-300 hover:text-blue-500">Login</Link>
-            <Link href="/signup" onClick={toggleMenu} className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-white">Sign Up</Link>
+            <Link href="/login" onClick={toggleMenu} className="block px-4 py-2 text-sm text-darkgreen hover:bg-lightgreen hover:text-darkgreen">Login</Link>
+            <Link href="/signup" onClick={toggleMenu} className="block px-4 py-2 text-sm text-darkgreen hover:bg-lightgreen hover:text-darkgreen">Sign Up</Link>
           </div>
         </div>
       )}

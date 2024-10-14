@@ -23,7 +23,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <div className="py-16 bg-black">
+    <div className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row">
         {/* Left Column: Features */}
         <div className="w-full p-8">
@@ -31,10 +31,10 @@ const FeaturesSection = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="p-6 bg-gray-800 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl shadow-blue-300 hover:shadow-blue-300 hover:border-t-4 hover:border-blue-500"
+                className="p-6 bg-gray-100 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:shadow-lime-100 shadow-green-900 border-t-4 border-green-900"
               >
-                <h3 className="text-xl font-semibold text-blue-500">{feature.title}</h3>
-                <p className="text-gray-300 mt-2">{feature.description}</p>
+                <h3 className="text-xl font-semibold text-green-900">{feature.title}</h3>
+                <p className="text-gray-600 mt-2">{feature.description}</p>
               </div>
             ))}
           </div>

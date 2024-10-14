@@ -4,9 +4,9 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-gray-700">
-      <div className="max-w-7xl bg-black mx-auto text-center">
-        <p>&copy; Kredia 2024. All rights reserved.</p>
+    <footer className="bg-lime-900 w-full text-lime-100 px-4 py-4">
+      <div className="text-center">
+        <p>&copy; Purrlend All rights reserved.</p>
       </div>
     </footer>
   );
