@@ -1,16 +1,16 @@
-"use client"; // Add this line at the very top of your file
+"use client";
 
 import Link from 'next/link';
 import React, { useState } from 'react';
-import Head from 'next/head'
-
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
 
     try {
       const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:OHuLzjtm/auth/signup', {
@@ -18,31 +18,50 @@ const Signup = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        let errorData;
+        try {
+          errorData = await response.json();
+          if (errorData.message) {
+            // Xano specific error message
+            setError(errorData.message);
+          } else if (response.status === 400) {
+            setError('Bad Request: Please check your input.');
+          } else if (response.status === 401 || response.status === 403) {
+            setError('Unauthorized: Incorrect credentials or access denied.');
+          } else if (response.status === 500) {
+            setError('Server Error: Something went wrong on our end.');
+          } else {
+            setError(`HTTP Error ${response.status}: ${response.statusText}`);
+          }
+        } catch (parseError) {
+          // If we can't parse the JSON, we still want to show something went wrong
+          setError('An unexpected error occurred. Please try again.');
+        }
+        throw new Error(errorData?.message || 'Signup failed');
       }
 
       const data = await response.json();
       if (data.token) {
         console.log('Token received:', data.token);
-        // Here you would handle the token, like saving it to localStorage or cookies
+        localStorage.setItem('token', data.token);
+        // Here you might want to redirect or show a success message
       } else {
         throw new Error('No token received');
       }
     } catch (error) {
-      console.error('There has been a problem with your fetch operation:', error);
-      // Handle the error appropriately
+      console.error('Error during signup:', error);
+      if (!error.message) {
+        setError('Network error or unexpected issue occurred.');
+      }
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white relative">
+    <div className="flex items-center justify-center min-h-screen relative">
       <div className="w-full max-w-md p-8 space-y-8 bg-lime-900 shadow-lg rounded-xl z-10">
         <h1 className="text-3xl font-bold text-center text-white">Sign up</h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
@@ -54,7 +73,7 @@ const Signup = () => {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required="true"
+              required
               className="w-full pl-4 pr-4 py-2 border-b-2 border-lime-900 bg-lime-50 text-black focus:outline-none focus:border-lime-50 transition-colors"
               placeholder="Email"
             />
@@ -67,11 +86,12 @@ const Signup = () => {
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required="true"
+              required
               className="w-full pl-4 pr-4 py-2 border-b-2 border-lime-900 bg-lime-50 text-black focus:outline-none focus:border-lime-50 transition-colors"
               placeholder="Password"
             />
           </div>
+          {error && <p className="text-red-500">{error}</p>}
           <div>
             <button
               type="submit"
