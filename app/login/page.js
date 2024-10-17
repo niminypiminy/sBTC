@@ -15,7 +15,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:OHuLzjtm/auth/login', {
+      const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:8kzD815Z/auth/login', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,14 +26,16 @@ const Login = () => {
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Error response:', errorData);
-        throw new Error(errorData.message || 'Login failed');
+        setError(errorData.message || 'Login failed');
+        return; // Exit if there's an error
       }
 
       const data = await response.json();
-      if (data.token) {
-        console.log('Token received:', data.token);
-        localStorage.setItem('token', data.token); // Store the token for later use
-        router.push('/dashboard'); // Redirect to dashboard
+      console.log('Data received:', data);
+      if (data.authToken) {
+        console.log('Token received:', data.authToken);
+        localStorage.setItem('token', data.authToken);
+        router.push('/dashboard');
       } else {
         throw new Error('No token received');
       }
@@ -44,47 +46,46 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen relative">
-      <div className="w-full max-w-md p-8 space-y-8 bg-lime-900 shadow-lg rounded-xl z-10">
-        <h1 className="text-3xl font-bold text-center text-white">Login</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-xl">
+        <h1 className="text-3xl font-bold text-center">Login to Your Account</h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="sr-only">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full pl-4 pr-4 py-2 border-b-2 border-lime-900 bg-lime-50 text-black focus:outline-none focus:border-lime-50 transition-colors"
-              placeholder="Email"
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              required 
+              placeholder="Email address"
             />
           </div>
           <div>
-            <label htmlFor="password" className="sr-only">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full pl-4 pr-4 py-2 border-b-2 border-lime-900 bg-lime-50 text-black focus:outline-none focus:border-lime-50 transition-colors"
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              required 
               placeholder="Password"
             />
           </div>
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500 text-xs italic">{error}</p>}
           <div>
-            <button
-              type="submit"
-              className="w-full py-2 text-white bg-lime-500 hover:bg-lime-900 hover:text-lime-100 rounded-md transition-colors duration-200"
+            <button 
+              type="submit" 
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
             >
               Login
             </button>
           </div>
-          <div className="text-center text-sm text-gray-400">
-            <Link href="/signup" className="font-medium text-lime-100 px-4">Sign up</Link>
+          <div className="text-center text-sm">
+            Don't have an account? 
+            <Link href="/signup" className="font-medium text-lime-600 hover:text-lime-500 px-2">Sign Up</Link>
           </div>
         </form>
       </div>

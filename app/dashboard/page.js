@@ -1,14 +1,14 @@
-
 "use client";
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import WalletBalance from './components/walletbalance';
-import OrderBook from './components/orderbook';
+import Sidebar from './components/sidebar';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('balance');
   const router = useRouter();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Dashboard = () => {
       }
 
       try {
-        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:OHuLzjtm/auth/me', {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:8kzD815Z/auth/me', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, // Include token in headers
@@ -51,11 +51,28 @@ const Dashboard = () => {
     return <p>Loading...</p>; // Show loading state while fetching
   }
 
+  const renderActiveTab = () => {
+    switch (activeTab) {
+      case 'balance':
+        return <WalletBalance />;
+      case 'security':
+        return <div>Security Settings Component</div>;
+      case 'profile':
+        return <div>Profile Settings Component</div>;
+      case 'orderbook':
+        return <div>Order Book Component</div>;
+      default:
+        return <WalletBalance />;
+    }
+  };
+
   return (
-    <div>
-      <h1>Welcome, {user.name}!</h1> {/* Example of using user data */}
-      <WalletBalance />
-      <OrderBook />
+    <div className="flex">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="flex-1 p-6">
+        <h1>Welcome, {user.name}!</h1>
+        {renderActiveTab()}
+      </div>
     </div>
   );
 };
