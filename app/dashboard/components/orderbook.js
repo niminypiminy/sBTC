@@ -16,13 +16,13 @@ const OrderBook = () => {
           <div className="flex justify-center mb-4">
             <button 
               onClick={() => setActiveTab('lend')} 
-              className={`px-4 py-2 mx-2 rounded ${activeTab === 'lend' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+              className={`px-4 py-2 mx-2 rounded ${activeTab === 'lend' ? 'bg-blue-600 text-white' : 'bg-gray-900 text-gray-300'}`}
             >
               Lend
             </button>
             <button 
               onClick={() => setActiveTab('borrow')} 
-              className={`px-4 py-2 mx-2 rounded ${activeTab === 'borrow' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+              className={`px-4 py-2 mx-2 rounded ${activeTab === 'borrow' ? 'bg-blue-600 text-white' : 'bg-gray-900 text-gray-300'}`}
             >
               Borrow
             </button>

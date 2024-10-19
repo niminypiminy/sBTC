@@ -47,8 +47,8 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-xl">
-        <h1 className="text-3xl font-bold text-center">Login to Your Account</h1>
+      <div className="w-1/3 p-8 space-y-8 bg-white shadow-lg rounded-xl">
+        <h1 className="text-3xl font-bold text-center">Login</h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
@@ -57,7 +57,7 @@ const Login = () => {
               id="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               required 
               placeholder="Email address"
             />
@@ -69,7 +69,7 @@ const Login = () => {
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               required 
               placeholder="Password"
             />
@@ -78,14 +78,14 @@ const Login = () => {
           <div>
             <button 
               type="submit" 
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
             >
               Login
             </button>
           </div>
           <div className="text-center text-sm">
             Don't have an account? 
-            <Link href="/signup" className="font-medium text-lime-600 hover:text-lime-500 px-2">Sign Up</Link>
+            <Link href="/signup" className="font-medium text-gray-600 hover:text-gray-500 px-2">Sign Up</Link>
           </div>
         </form>
       </div>

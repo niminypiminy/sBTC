@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const Signup = () => {
+  const [name, setName] = useState(''); // New state for name
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,7 +23,7 @@ const Signup = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }), // Include name in the request
       });
 
       const data = await response.json();
@@ -49,9 +50,21 @@ const Signup = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-xl">
+      <div className="w-1/3 p-8 space-y-8 bg-white shadow-lg rounded-xl">
         <h1 className="text-3xl font-bold text-center">Create an Account</h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              required 
+              placeholder="Your Name"
+            />
+          </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <input 
@@ -59,7 +72,7 @@ const Signup = () => {
               id="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               required 
               placeholder="Email address"
             />
@@ -71,24 +84,24 @@ const Signup = () => {
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-600 focus:border-gray-700 sm:text-sm"
               required 
               placeholder="Password"
             />
           </div>
           {error && <p className="text-red-500 text-xs italic">{error}</p>}
-          {message && <p className="text-green-500 text-sm">{message}</p>}
+          {message && <p className="text-gray-500 text-sm">{message}</p>}
           <div>
             <button 
               type="submit" 
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
             >
               Sign Up
             </button>
           </div>
           <div className="text-center text-sm">
             Already have an account? 
-            <Link href="/login" className="font-medium text-lime-600 hover:text-lime-500 px-2">Login</Link>
+            <Link href="/login" className="font-medium text-gray-600 hover:text-gray-500 px-2">Login</Link>
           </div>
         </form>
       </div>
