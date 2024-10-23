@@ -9,16 +9,16 @@ const BannerSection = () => {
     >
       {/* Background shapes */}
       <div className="absolute inset-0 flex justify-center items-start pointer-events-none">
-        <div className="w-32 h-32 bg-lime-100 rounded-full opacity-20 blur-2xl"></div>
+        <div className="w-32 h-32 bg-blue-100 rounded-full opacity-20 blur-2xl"></div>
       </div>
       <div className="absolute inset-0 flex justify-end items-end pointer-events-none">
-        <div className="w-48 h-48 bg-lime-100 rounded-full opacity-30 blur-3xl"></div>
+        <div className="w-48 h-48 bg-blue-100 rounded-full opacity-30 blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
         <h2 className="text-3xl md:text-5xl font-bold mb-4 flex flex-col items-center">
           Your Money, Your Rules: 
-          <span className="bg-lime-100 text-lime-900 px-4 py-2 rounded-lg mt-4 inline-flex items-center transition-transform hover:scale-105 hover:bg-lime-100 hover:text-green-900">
+          <span className="bg-blue-100 text-blue-900 px-4 py-2 rounded-lg mt-4 inline-flex items-center transition-transform hover:scale-105 hover:bg-blue-100 hover:text-blue-900">
             Be Your Own Bank.
           </span>
         </h2>

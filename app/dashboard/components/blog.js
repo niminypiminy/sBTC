@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -7,22 +9,23 @@ const Discovery = () => {
   const articles = [
     {
       title: "How to Protect Your Wallet",
-      imageUrl: "https://via.placeholder.com/150", // Placeholder image
-      link: "/articles/how-to-protect-your-wallet"
+      imageUrl: "/images/wallet.jpg",
+      link: "/blog/posts/protectyourwallet"
     },
     {
       title: "Our Security Model",
-      imageUrl: "https://via.placeholder.com/150", // Placeholder image
-      link: "/articles/our-security-model"
+      imageUrl: "/images/shield.jpg",
+      link: "/blog/posts/oursecuritymodel"
     },
     {
       title: "How to Use the Order Book",
-      imageUrl: "https://via.placeholder.com/150", // Placeholder image
-      link: "/articles/how-to-use-order-book"
+      imageUrl: "/images/blockchain.jpg",
+      link: "/blog/posts/explainingorderbook"
     },
   ];
 
   const handleCardClick = (link) => {
+    // Navigate directly to the blog post
     router.push(link);
   };
 

@@ -1,21 +1,39 @@
 "use client";
 
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
-  const [name, setName] = useState(''); // New state for name
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
   const router = useRouter();
+  const [ipAddress, setIpAddress] = useState('');
+
+  // Fetch IP address as plain text on component mount
+  useEffect(() => {
+    const fetchIpAddress = async () => {
+      try {
+        const response = await fetch('https://api.ipify.org');
+        const ip = await response.text(); // Getting the IP as plain text
+        setIpAddress(ip);
+      } catch (error) {
+        console.error('Error fetching IP address:', error);
+      }
+    };
+
+    fetchIpAddress();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
-    setMessage('');
+
+    const currentTime = new Date().toISOString(); // Get current time in ISO format
 
     try {
       const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:8kzD815Z/auth/signup', {
@@ -23,28 +41,28 @@ const Signup = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password }), // Include name in the request
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          password, 
+          timestamp: currentTime, // Include current time
+          ip_address: ipAddress // Include plain text IP address
+        }),
       });
 
-      const data = await response.json();
-      console.log(data); // Log the response for debugging
-
       if (response.ok) {
-        if (data.authToken) {  // Use authToken instead of token
-          localStorage.setItem('token', data.authToken);
-          setMessage('Thank you for signing up.');
-          setTimeout(() => {
-            router.push('/dashboard');
-          }, 1500);
-        } else {
-          throw new Error('Auth token was expected but not received.');
-        }
+        const data = await response.json();
+        localStorage.setItem('token', data.authToken);
+        toast.success('Signup successful!');
+        router.push('/dashboard'); // Redirect to dashboard
       } else {
+        const data = await response.json();
         setError(data.message || 'An error occurred during signup.');
+        toast.error(data.message || 'An error occurred during signup.');
       }
     } catch (error) {
-      console.error('Signup failed:', error);
-      setError(error.message || 'Failed to connect to the server. Please try again.');
+      setError('Failed to connect to the server. Please try again.');
+      toast.error('Failed to connect to the server. Please try again.');
     }
   };
 
@@ -60,7 +78,7 @@ const Signup = () => {
               id="name" 
               value={name} 
               onChange={(e) => setName(e.target.value)} 
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-500"
               required 
               placeholder="Your Name"
             />
@@ -72,7 +90,7 @@ const Signup = () => {
               id="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-500"
               required 
               placeholder="Email address"
             />
@@ -84,24 +102,23 @@ const Signup = () => {
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-600 focus:border-gray-700 sm:text-sm"
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-500"
               required 
               placeholder="Password"
             />
           </div>
           {error && <p className="text-red-500 text-xs italic">{error}</p>}
-          {message && <p className="text-gray-500 text-sm">{message}</p>}
           <div>
             <button 
               type="submit" 
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-900 hover:bg-blue-700"
             >
               Sign Up
             </button>
           </div>
           <div className="text-center text-sm">
             Already have an account? 
-            <Link href="/login" className="font-medium text-gray-600 hover:text-gray-500 px-2">Login</Link>
+            <Link href="/login" className="font-medium text-blue-500 hover:text-blue-900 px-2">Login</Link>
           </div>
         </form>
       </div>

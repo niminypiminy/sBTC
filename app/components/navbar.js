@@ -15,14 +15,14 @@ const Navbar = () => {
     <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold">Purr<span className="bg-lime-100 text-lime-900 py-1 px-2 rounded inline-block">lend</span></Link>
+        <Link href="/" className="text-xl font-bold">Purr<span className="bg-blue-100 text-blue-900 py-1 px-2 rounded inline-block">lend</span></Link>
 
         {/* Navigation Links (hidden on mobile) */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/login" className="bg-lime-900 text-white hover:bg-lime-100 hover:text-lime-900 transition duration-300 py-2 px-4 rounded-full">
+          <Link href="/login" className="bg-blue-900 text-white hover:bg-blue-100 hover:text-blue-900 transition duration-300 py-2 px-4 rounded-full">
             Login
           </Link>
-          <Link href="/signup" className="bg-lime-100 text-lime-900 hover:bg-lime-900 hover:text-lime-100 transition duration-300 py-2 px-4 rounded-full border border-darkgreen">
+          <Link href="/signup" className="bg-blue-100 text-blue-900 hover:bg-blue-900 hover:text-blue-100 transition duration-300 py-2 px-4 rounded-full border border-darkgreen">
             Sign Up
           </Link>
         </div>

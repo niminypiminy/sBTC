@@ -24,16 +24,16 @@ const features = [
 const FeaturesSection = () => {
   return (
     <div className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row">
+      <div className="w-2/3 mx-auto px-4 flex flex-col md:flex-row">
         {/* Left Column: Features */}
         <div className="w-full p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="p-6 bg-gray-100 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:shadow-lime-100 shadow-green-900 border-t-4 border-green-900"
+                className="p-6 bg-gray-100 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:shadow-blue-100 shadow-blue-900 border-t-4 border-blue-900"
               >
-                <h3 className="text-xl font-semibold text-green-900">{feature.title}</h3>
+                <h3 className="text-xl font-semibold text-blue-900">{feature.title}</h3>
                 <p className="text-gray-600 mt-2">{feature.description}</p>
               </div>
             ))}

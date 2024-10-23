@@ -8,9 +8,8 @@ const OrderBook = () => {
   const [activeTab, setActiveTab] = useState('lend');
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center mt-24 px-12 min-h-screen bg-white">
       <div className="w-full max-w-lg">
-        <h1 className="text-center text-3xl font-bold text-black mb-6">BTC Order Book</h1>
         <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
           {/* Tabs */}
           <div className="flex justify-center mb-4">

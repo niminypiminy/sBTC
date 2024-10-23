@@ -2,12 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import WalletBalance from './components/walletbalance';  // Ensure correct case
+import WalletBalance from './components/walletbalance';
 import SecuritySettings from './components/security';
 import Transactions from './components/swap';
 import Sidebar from './components/sidebar';
 import OrderBook from './components/orderbook';
-import Discovery from './components/blog';  // Import the Discovery component
+import Discovery from './components/blog';
+import Contact from './components/contact';
+import SessionManagement from './components/sessions';
 
 const getGreeting = (name) => {
   const hours = new Date().getHours();
@@ -21,10 +23,17 @@ const getGreeting = (name) => {
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('balance');
+  const [activeTab, setActiveTab] = useState('balance'); // Default tab
   const router = useRouter();
 
   useEffect(() => {
+    // Check for active tab in local storage
+    const storedTab = localStorage.getItem('activeTab');
+    if (storedTab) {
+      setActiveTab(storedTab);
+      localStorage.removeItem('activeTab'); // Clean up
+    }
+
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -48,6 +57,10 @@ const Dashboard = () => {
     fetchUserData();
   }, [router]);
 
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+  };
+
   if (error) return <p className="text-red-500">{error}</p>;
   if (!user) return <p>Loading...</p>;
 
@@ -56,13 +69,17 @@ const Dashboard = () => {
       case 'balance':
         return <WalletBalance />;
       case 'security':
-        return <SecuritySettings />;
+        return <SecuritySettings user={user} updateUser={updateUser} />;
+      case 'sessions':
+        return <SessionManagement />;
       case 'swap':
         return <Transactions />;
       case 'orderbook':
         return <OrderBook />;
-      case 'discovery':  // Add case for Discovery
+      case 'discovery':
         return <Discovery />;
+      case 'contact':
+        return <Contact />;
       default:
         return <WalletBalance />;
     }
